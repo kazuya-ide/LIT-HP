@@ -14,7 +14,7 @@ const navLinks = [
     href: "https://www.hotpepper.jp/strJ003324016/?vos=evhpppg0007&pog=mt(b)ti(kwd-2315813023436)dv(c)cr(738602708295)fi()gi(142320910489)ci(17559560127)lc(9197678)ps()nw(g)&gclsrc=aw.ds&gad_source=1&gad_campaignid=17559560127&gbraid=0AAAAADSGJMF8UfGYenHmXncxBoGksCJdF&gclid=Cj0KCQjw267GBhCSARIsAOjVJ4FvKhbtUyL-OaINmCU5Z7tA3F__LdJTakr_XpoBgMLw0RkCTi2mr3EaApipEALw_wcB",
   },
   { label: "Lsecurity", href: "/product" },
-  { label: "探偵業", href: "/tantei" },
+  { label: "探偵業", href: "/lsa" },
   { label: "会社情報", href: "/about" },
   { label: "採用情報", href: "/recruit" },
 ];
