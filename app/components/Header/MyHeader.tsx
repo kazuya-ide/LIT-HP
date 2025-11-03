@@ -11,7 +11,11 @@ const navLinks = [
   { label: "企業情報", href: "/about" },
   { label: "事業紹介", href: "/services" },
   { label: "グループ紹介", href: "/group-companies" },
-  { label: "採用情報", href: "/recruit" },
+  {
+    label: "採用情報",
+    href: "https://en-gage.net/llc-lit/", // ✅ 外部サイトへ変更
+    external: true,
+  },
 ];
 
 // === 右側ボタン ===
@@ -51,7 +55,7 @@ const Header = () => {
 
         {/* --- PCナビ --- */}
         <nav className="hidden lg:flex items-center gap-6 text-base font-bold tracking-wide text-[#232323]">
-          {navLinks.map(({ label, href }) => (
+          {navLinks.map(({ label, href, external }) => (
             <Link
               key={href}
               href={href}
@@ -60,7 +64,8 @@ const Header = () => {
                   ? "text-black underline underline-offset-4"
                   : "hover:text-[#666]"
               }`}
-              target={href.startsWith("http") ? "_blank" : "_self"}
+              target={external ? "_blank" : "_self"} // ✅ 外部リンクは新規タブで開く
+              rel={external ? "noopener noreferrer" : undefined}
             >
               {label}
             </Link>
@@ -132,7 +137,7 @@ const Header = () => {
           </button>
 
           <div className="flex flex-col gap-6">
-            {navLinks.map(({ label, href }) => (
+            {navLinks.map(({ label, href, external }) => (
               <Link
                 key={href}
                 href={href}
@@ -142,7 +147,8 @@ const Header = () => {
                     : "text-[#232323] hover:text-black"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
-                target={href.startsWith("http") ? "_blank" : "_self"}
+                target={external ? "_blank" : "_self"}
+                rel={external ? "noopener noreferrer" : undefined}
               >
                 {label}
               </Link>
