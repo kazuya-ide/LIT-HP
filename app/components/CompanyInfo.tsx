@@ -3,67 +3,79 @@ import Link from "next/link";
 
 export default function CompanyInformation() {
   return (
-    <section className="flex flex-col md:flex-row w-full bg-[#ededed]">
+    <section
+      className="flex flex-col md:flex-row w-full bg-[#ededed] text-[#232323]"
+      aria-labelledby="group-company-title"
+    >
       {/* === テキストエリア === */}
       <div className="flex-1 flex flex-col justify-center px-8 py-14 md:px-16 bg-[#ededed]">
-        <span className="text-xs font-bold uppercase text-[#bbb] tracking-widest mb-2">
+        <span className="text-xs font-bold uppercase text-[#999] tracking-widest mb-3">
           COMPANY INFORMATION
         </span>
 
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#232323] mb-4">
+        <h2
+          id="group-company-title"
+          className="text-3xl md:text-4xl font-extrabold mb-5"
+        >
           グループ会社紹介
         </h2>
 
-        <p className="text-lg text-[#555] leading-relaxed mb-6">
-          合同会社LITグループは、地域に根ざし、社会の安心と信頼を支える
-          多彩な事業を展開しています。建設・飲食・IT・セキュリティ・探偵業など、
-          それぞれの分野でプロフェッショナルが活躍しています。
+        <p className="text-lg text-[#444] leading-relaxed mb-8">
+          合同会社LITグループは、北海道を中心に
+          「安心・信頼・地域貢献」をテーマとして活動しています。
+          建設・飲食・IT・セキュリティ・探偵業など多岐にわたる分野で、
+          専門スタッフがそれぞれの現場で活躍しています。
         </p>
 
         {/* === グループ会社リスト === */}
-        <ul className="mb-10 space-y-4">
+        <ul className="space-y-5 mb-10">
           <li className="flex flex-col md:flex-row md:items-center">
             <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#bbb] mr-3"></span>
-              <span className="font-semibold text-[#232323] text-lg">
+              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
+              <span className="font-semibold text-lg">
                 北海工務店（建設・不動産）
               </span>
             </div>
             <Link
               href="https://www.sapporo-builderr.com/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
             >
               https://www.sapporo-builderr.com/
             </Link>
+            {/* ✅ URL確認：稼働中ドメイン（SSL有効） */}
           </li>
 
           <li className="flex flex-col md:flex-row md:items-center">
             <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#bbb] mr-3"></span>
-              <span className="font-semibold text-[#232323] text-lg">
+              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
+              <span className="font-semibold text-lg">
                 味扉 AJITO（飲食サービス）
               </span>
             </div>
             <Link
               href="https://www.hotpepper.jp/strJ003324016/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
             >
               ホットペッパー店舗ページ
             </Link>
+            {/* ⚠️ HotPepperリンクは動作確認要 */}
           </li>
 
           <li className="flex flex-col md:flex-row md:items-center">
             <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#bbb] mr-3"></span>
-              <span className="font-semibold text-[#232323] text-lg">
+              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
+              <span className="font-semibold text-lg">
                 L.SECURITY（セキュリティ事業）
               </span>
             </div>
             <Link
               href="https://l-security-lit.com/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
             >
               https://l-security-lit.com/
@@ -72,33 +84,36 @@ export default function CompanyInformation() {
 
           <li className="flex flex-col md:flex-row md:items-center">
             <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#bbb] mr-3"></span>
-              <span className="font-semibold text-[#232323] text-lg">
+              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
+              <span className="font-semibold text-lg">
                 LSA（探偵・調査業）
               </span>
             </div>
             <Link
-              href="https://li-ttamtei.vercel.app/lsa"
+              href="https://lsa.lit4.net"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
             >
-              https://li-ttamtei.vercel.app/lsa
+              https://lsa.lit4.net/
             </Link>
+            {/* ⚠️ Vercelドメインは後で正式ドメインへ置換予定 */}
           </li>
 
           <li className="flex flex-col md:flex-row md:items-center">
             <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#bbb] mr-3"></span>
-              <span className="font-semibold text-[#232323] text-lg">
-                LIT STUDIO（IT・Webサービス）comingsoon,,,
+              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
+              <span className="font-semibold text-lg">
+                LIT STUDIO（IT・Webサービス）coming soon...
               </span>
             </div>
             <Link
-              href="https://www.lit4.net/"
+              href="https://lit4.net/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
             >
-              https://www.lit4.net/
+              https://lit4.net/
             </Link>
           </li>
         </ul>
@@ -116,7 +131,7 @@ export default function CompanyInformation() {
       <div className="flex-1 relative min-h-[360px] hidden md:block bg-[#ededed]">
         <Image
           src="/business-collaboration.jpg"
-          alt="LITグループ連携イメージ"
+          alt="LITグループの連携を象徴するビジネスイメージ"
           fill
           style={{
             objectFit: "cover",
@@ -127,6 +142,8 @@ export default function CompanyInformation() {
           sizes="(max-width: 768px) 100vw, 50vw"
           priority
         />
+        {/* ⚠️ 画像パス確認：
+            /public/business-collaboration.jpg が存在するか要チェック */}
       </div>
     </section>
   );
