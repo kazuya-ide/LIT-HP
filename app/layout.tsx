@@ -3,7 +3,7 @@ import "./globals.css";
 import Header from "@/app/components/Header/MyHeader";
 import FooterWrapper from "@/app/components/FooterWrapper";
 
-// ✅ SEO・OGP・構造化データ付き設定
+// ✅ メタデータ（SEO / OGP / SNS対応）
 export const metadata: Metadata = {
   metadataBase: new URL("https://lit4.net"),
   title: {
@@ -50,15 +50,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://lit4.net",
   },
-  verification: {
-    google: "google-site-verification: google2eba1443f596bc3a.html",
-  },
   icons: {
     icon: "/favicon.ico",
   },
 };
 
-// ✅ JSON-LD構造化データ（組織情報）
+// ✅ JSON-LD 構造化データ（組織スキーマ）
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -91,16 +88,38 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* ✅ 構造化データ挿入 */}
+        {/* ✅ 構造化データ（JSON-LD） */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
+        {/* ✅ Google Analytics 4 トラッキングコード */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZVXV0K9HJC"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZVXV0K9HJC', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
       </head>
-      <body className="bg-[#ededed] text-[#232323] antialiased min-h-screen font-sans">
-        <Header />
-        <main className="min-h-[70vh]">{children}</main>
-        <FooterWrapper />
+
+      <body className="bg-[#f7f7f7] text-[#232323] antialiased min-h-screen font-sans">
+        {/* ✅ ヘッダーで隠れないように上マージン確保 */}
+        <div className="pt-[80px]">
+          <Header />
+          <main className="min-h-[70vh]">{children}</main>
+          <FooterWrapper />
+        </div>
       </body>
     </html>
   );
