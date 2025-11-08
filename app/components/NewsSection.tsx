@@ -4,7 +4,8 @@ import { getAllNews } from "@/lib/news";
 export default function NewsSection() {
   const news = getAllNews();
   return (
-    <section className="w-full px-4 py-16 bg-[#ededed] border-b border-[#bbb]">
+  <section className="w-full px-4 py-16 bg-[#ededed] border-b border-[#bbb] mt-[-80px] pt-[80px]">
+
       <div className="max-w-5xl mx-auto">
         <h2 className="text-4xl font-extrabold text-[#232323] mb-8">NEWS</h2>
         <hr className="border-t border-[#bbb] mb-6" />

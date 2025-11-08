@@ -2,53 +2,54 @@ import Link from "next/link";
 import Image from "next/image";
 import { getAllNews } from "@/lib/news";
 
-export default function NewsListPage() {
+export default function NewsPage() {
   const news = getAllNews();
 
   return (
-    <div className="bg-neutral-950 min-h-screen py-14 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-10 text-center drop-shadow-lg">
+    <section className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 text-[#232323] py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* === 見出し === */}
+        <h1 className="text-4xl font-extrabold text-center mb-14 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
           お知らせ
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        {/* === 記事リスト === */}
+        <div className="grid gap-10 md:grid-cols-2">
           {news.map((item) => (
-            <Link key={item.slug} href={`/news/${item.slug}`} className="group">
-              <div
-                className={`
-                  bg-neutral-900/90 rounded-2xl shadow-lg overflow-hidden
-                  border border-slate-700
-                  transition-all duration-200
-                  hover:scale-105 hover:shadow-2xl
-                  hover:border-t-4 hover:border-t-yellow-400
-                  hover:border-slate-700
-                  flex flex-col h-full
-                `}
-                style={{ borderTopWidth: "1px" }}
-              >
-                {item.image && (
-                  <div className="w-full h-44 relative">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover brightness-90"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                )}
-                <div className="p-5 flex flex-col flex-1">
-                  <h2 className="font-bold text-lg text-yellow-300 mb-2 group-hover:text-yellow-400 transition">
-                    {item.title}
-                  </h2>
-                  <div className="text-xs text-gray-400 mb-2">{item.date}</div>
-                  <p className="text-gray-400 text-sm flex-1">{item.excerpt}</p>
+            <Link
+              key={item.slug}
+              href={`/news/${item.slug}`}
+              className="group block bg-white border border-gray-300 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all"
+            >
+              {item.image && (
+                <div className="relative w-full h-48 overflow-hidden rounded-t-2xl">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
+              )}
+              <div className="p-6">
+                <p className="text-sm text-gray-500 mb-2">
+                  {new Date(item.date).toLocaleDateString("ja-JP", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </p>
+                <h2 className="text-xl font-bold mb-2 group-hover:text-gray-700 transition">
+                  {item.title}
+                </h2>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {item.excerpt}
+                </p>
               </div>
             </Link>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

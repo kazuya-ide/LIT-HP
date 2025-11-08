@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from "./Hero";
 import Philosophy from "./Philosophy";
 import Businesses from "./Businesses";
-import Voices from "./Voices";
 import Overview from "./Overview";
 import License from "./License";
 import SEOJsonLD from "./SEOJsonLD";
@@ -45,7 +44,7 @@ export default function AboutPage() {
         <Hero />
         <Philosophy />
         <Businesses />
-        <Voices />
+     
         <Overview />
         <License />
       </main>

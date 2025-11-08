@@ -2,15 +2,15 @@
 import HeroSection from "./components/Herosection";
 import CompanyInformation from "./components/CompanyInfo";
 import NewsSection from "./components/NewsSection";
-import HeroVideo from "./components/HeroVideo";
-import GroupCompaniesCarousel from "./components/GroupCompaniesCarousel";
+
+
 
 export default function Home() {
   return (
     <main className="relative overflow-x-hidden">
       {/* ページ先頭に動画ブロック */}
       <div className="w-screen">
-        <HeroVideo />
+ 
       </div>
 
       {/* 下のコンテンツ */}
@@ -18,7 +18,7 @@ export default function Home() {
         <HeroSection />
         <CompanyInformation />
         <div className="mt-20" />
-        <GroupCompaniesCarousel />
+  
         <NewsSection />
         <div className="mb-20" />
       </div>

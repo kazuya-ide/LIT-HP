@@ -2,148 +2,139 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CompanyInformation() {
+  const mainCompanies = [
+    {
+      name: "L.SECURITY（セキュリティ事業）",
+      desc: "札幌を拠点に1号・2号・4号警備を展開。機械警備・イベント警備を中心に、企業や施設の安全を守ります。SECOMとの提携で高い防犯品質を実現。",
+      image: "/Lsecurity.jpg",
+      link: "https://l-security-lit.com/",
+      grad: "from-blue-900 via-slate-800 to-gray-700",
+    },
+    {
+      name: "L・Secret Agent（探偵・調査業）",
+      desc: "浮気・不倫調査、企業調査、行方・ストーカー対策まで。法務機関と連携し、信頼性の高い調査と証拠収集で安心を提供します。",
+      image: "/LSArogo.jpg",
+      link: "https://lsa.lit4.net/",
+      grad: "from-gray-900 via-gray-800 to-gray-600",
+    },
+  ];
+
+  const subCompanies = [
+    {
+      name: "北海工務店（建設・不動産）",
+      desc: "住宅・店舗・オフィスの建築・リフォームを通じて地域の街づくりを支えます。信頼と技術で快適な暮らしを実現。",
+      image: "/hokkaikoumutenn.logo.jpg",
+      link: "https://www.sapporo-builderr.com/",
+      grad: "from-amber-800 to-yellow-500",
+    },
+    {
+      name: "味扉 AJITO（飲食サービス）",
+      desc: "すすきのの隠れ家的ダイニング。創作料理とこだわりの空間で、心に残る特別なひとときを。",
+      image: "/ajito.logo.jpg",
+      link: "https://www.hotpepper.jp/strJ003324016/",
+      grad: "from-rose-800 to-red-500",
+    },
+    {
+      name: "LIT STUDIO（IT・Webサービス）",
+      desc: "Web制作・ECサイト構築・アプリ開発を通じて企業のDXを支援。AIとテクノロジーで次世代のWebを創造します。",
+      image: "/images/litstudio.jpg",
+      link: "https://lit4.net/",
+      grad: "from-indigo-700 to-purple-600",
+    },
+  ];
+
   return (
     <section
-      className="flex flex-col md:flex-row w-full bg-[#ededed] text-[#232323]"
+      className="w-full bg-[#ededed] py-20 px-6 md:px-12"
       aria-labelledby="group-company-title"
     >
-      {/* === テキストエリア === */}
-      <div className="flex-1 flex flex-col justify-center px-8 py-14 md:px-16 bg-[#ededed]">
-        <span className="text-xs font-bold uppercase text-[#999] tracking-widest mb-3">
-          COMPANY INFORMATION
-        </span>
+      <div className="max-w-7xl mx-auto">
+        {/* --- 見出し --- */}
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold uppercase text-gray-500 tracking-widest">
+            COMPANY INFORMATION
+          </span>
+          <h2
+            id="group-company-title"
+            className="text-4xl md:text-5xl font-extrabold text-[#232323] mt-3 mb-6"
+          >
+            グループ会社紹介
+          </h2>
+          <p className="text-lg text-[#555] max-w-3xl mx-auto leading-relaxed">
+            LITグループは、北海道を中心に「安心・信頼・地域貢献」をテーマに活動。
+            各分野の専門チームが連携し、社会に新しい価値を提供しています。
+          </p>
+        </div>
 
-        <h2
-          id="group-company-title"
-          className="text-3xl md:text-4xl font-extrabold mb-5"
-        >
-          グループ会社紹介
-        </h2>
-
-        <p className="text-lg text-[#444] leading-relaxed mb-8">
-          合同会社LITグループは、北海道を中心に
-          「安心・信頼・地域貢献」をテーマとして活動しています。
-          建設・飲食・IT・セキュリティ・探偵業など多岐にわたる分野で、
-          専門スタッフがそれぞれの現場で活躍しています。
-        </p>
-
-        {/* === グループ会社リスト === */}
-        <ul className="space-y-5 mb-10">
-          <li className="flex flex-col md:flex-row md:items-center">
-            <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
-              <span className="font-semibold text-lg">
-                北海工務店（建設・不動産）
-              </span>
-            </div>
+        {/* === メイン2社（LSA & L.SECURITY） === */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+          {mainCompanies.map((c) => (
             <Link
-              href="https://www.sapporo-builderr.com/"
+              key={c.name}
+              href={c.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
+              className="group relative h-[400px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
             >
-              https://www.sapporo-builderr.com/
+              <Image
+                src={c.image}
+                alt={c.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${c.grad} opacity-80 group-hover:opacity-90 transition-all duration-500`}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                <h3 className="text-3xl md:text-4xl font-bold mb-3">{c.name}</h3>
+                <p className="text-base md:text-lg text-gray-100 leading-relaxed">
+                  {c.desc}
+                </p>
+              </div>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-white group-hover:w-full transition-all duration-500" />
             </Link>
-            {/* ✅ URL確認：稼働中ドメイン（SSL有効） */}
-          </li>
+          ))}
+        </div>
 
-          <li className="flex flex-col md:flex-row md:items-center">
-            <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
-              <span className="font-semibold text-lg">
-                味扉 AJITO（飲食サービス）
-              </span>
-            </div>
+        {/* === サブ3社 === */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {subCompanies.map((c) => (
             <Link
-              href="https://www.hotpepper.jp/strJ003324016/"
+              key={c.name}
+              href={c.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
+              className="group relative h-[300px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500"
             >
-              ホットペッパー店舗ページ
+              <Image
+                src={c.image}
+                alt={c.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div
+                className={`absolute inset-0 bg-gradient-to-t ${c.grad} opacity-85 group-hover:opacity-90 transition-all duration-500`}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <h4 className="text-2xl font-bold mb-2">{c.name}</h4>
+                <p className="text-sm text-gray-100 leading-relaxed line-clamp-3">
+                  {c.desc}
+                </p>
+              </div>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-500" />
             </Link>
-            {/* ⚠️ HotPepperリンクは動作確認要 */}
-          </li>
-
-          <li className="flex flex-col md:flex-row md:items-center">
-            <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
-              <span className="font-semibold text-lg">
-                L.SECURITY（セキュリティ事業）
-              </span>
-            </div>
-            <Link
-              href="https://l-security-lit.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
-            >
-              https://l-security-lit.com/
-            </Link>
-          </li>
-
-          <li className="flex flex-col md:flex-row md:items-center">
-            <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
-              <span className="font-semibold text-lg">
-                LSA（探偵・調査業）
-              </span>
-            </div>
-            <Link
-              href="https://lsa.lit4.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
-            >
-              https://lsa.lit4.net/
-            </Link>
-            {/* ⚠️ Vercelドメインは後で正式ドメインへ置換予定 */}
-          </li>
-
-          <li className="flex flex-col md:flex-row md:items-center">
-            <div className="flex items-center mb-1 md:mb-0">
-              <span className="w-2 h-2 rounded-full bg-[#999] mr-3"></span>
-              <span className="font-semibold text-lg">
-                LIT STUDIO（IT・Webサービス）coming soon...
-              </span>
-            </div>
-            <Link
-              href="https://lit4.net/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-[#000] md:ml-4 underline underline-offset-4"
-            >
-              https://lit4.net/
-            </Link>
-          </li>
-        </ul>
+          ))}
+        </div>
 
         {/* === CTAボタン === */}
-        <Link
-          href="/group-companies"
-          className="inline-block px-8 py-3 rounded-full bg-[#232323] text-white text-base font-bold shadow-md hover:bg-[#444] transition"
-        >
-          グループ一覧を見る
-        </Link>
-      </div>
-
-      {/* === イメージエリア === */}
-      <div className="flex-1 relative min-h-[360px] hidden md:block bg-[#ededed]">
-        <Image
-          src="/business-collaboration.jpg"
-          alt="LITグループの連携を象徴するビジネスイメージ"
-          fill
-          style={{
-            objectFit: "cover",
-            borderRadius: "1.5rem",
-            filter: "grayscale(1)",
-            backgroundColor: "#ededed",
-          }}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
-        {/* ⚠️ 画像パス確認：
-            /public/business-collaboration.jpg が存在するか要チェック */}
+        <div className="text-center mt-20">
+          <Link
+            href="/group-companies"
+            className="inline-block px-10 py-4 bg-[#232323] text-white text-lg font-bold rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+            グループ一覧を見る
+          </Link>
+        </div>
       </div>
     </section>
   );
