@@ -30,9 +30,10 @@ export const metadata: Metadata = {
     siteName: "合同会社LIT",
     locale: "ja_JP",
     type: "website",
+    // ✅ ここがポイント：OGP未指定時に default-ogp.jpg を使う
     images: [
       {
-        url: "/ogp.jpg",
+        url: "/default-ogp.jpg", // ← デフォルト画像
         width: 1200,
         height: 630,
         alt: "合同会社LIT公式サイト",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     title: "合同会社LIT｜北海道の地域を支えるWeb・警備・開発事業",
     description:
       "北海道札幌の合同会社LITは、Web制作・警備・開発事業で地域社会に貢献しています。",
-    images: ["/ogp.jpg"],
+    images: ["/default-ogp.jpg"], // ← デフォルト画像を指定
     creator: "@lit_official",
   },
   alternates: {

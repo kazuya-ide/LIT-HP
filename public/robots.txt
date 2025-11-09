@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.lit4.net
+
+# Sitemaps
+Sitemap: https://www.lit4.net/sitemap.xml

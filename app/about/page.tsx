@@ -1,35 +1,14 @@
 import type { Metadata } from "next";
+import { createMetadata } from "@/lib/seo"; // ✅ 追加
 import AboutClient from "./AboutClient";
 
-export const metadata: Metadata = {
-  title: "会社概要｜合同会社LIT",
+// ✅ createMetadata を使って SEOを簡潔に記述
+export const metadata: Metadata = createMetadata({
+  title: "会社概要",
   description:
-    "合同会社LITの会社概要ページ。北海道札幌を拠点に建設・警備・IT・飲食事業を展開し、地域社会に貢献しています。企業理念や事業内容、法人情報を掲載。",
-  alternates: {
-    canonical: "https://www.lit4.net/about",
-  },
-  openGraph: {
-    title: "会社概要｜合同会社LIT",
-    description:
-      "北海道札幌を拠点に地域社会と共に成長する合同会社LITの紹介ページです。",
-    url: "https://www.lit4.net/about",
-    siteName: "合同会社LIT",
-    images: [
-      {
-        url: "https://www.lit4.net/ogp-about.jpg",
-        width: 1200,
-        height: 630,
-        alt: "合同会社LIT 会社概要",
-      },
-    ],
-    locale: "ja_JP",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["https://www.lit4.net/ogp-about.jpg"],
-  },
-};
+    "合同会社LITの会社概要ページ。北海道札幌を拠点に建設・警備・IT・飲食事業を展開し、地域社会に貢献しています。企業理念・代表挨拶・法人情報などを掲載。",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
