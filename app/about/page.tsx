@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import Hero from "./Hero";
-import Philosophy from "./Philosophy";
-import Businesses from "./Businesses";
-import Overview from "./Overview";
-import License from "./License";
-import SEOJsonLD from "./SEOJsonLD";
+import AboutClient from "./AboutClient";
 
 export const metadata: Metadata = {
   title: "会社概要｜合同会社LIT",
@@ -39,14 +34,8 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-[#f8f8f8] text-[#232323]">
-      <SEOJsonLD />
       <main className="pt-20 md:pt-28">
-        <Hero />
-        <Philosophy />
-        <Businesses />
-     
-        <Overview />
-        <License />
+        <AboutClient />
       </main>
     </div>
   );

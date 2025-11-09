@@ -1,158 +1,217 @@
-// app/contact/page.tsx
 "use client";
+
 import { useState } from "react";
-import Particles from "react-tsparticles";
+import { motion } from "framer-motion";
+import { FaUser, FaEnvelope, FaComment, FaPaperPlane } from "react-icons/fa";
 
-const categories = [
-  { value: "浮気", label: "浮気調査のご相談" },
-  { value: "素行", label: "素行調査のご相談" },
-  { value: "企業、個人信用", label: "企業、個人信用調査のご相談" },
-  { value: "その他", label: "その他" },
-];
-
-export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    tel: "",
-    category: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isSending, setIsSending] = useState(false);
+export default function ContactSection() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessages, setErrorMessages] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+  }>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSending) return;
-    setIsSending(true);
-    if (!form.name || !form.email || !form.category) {
-      setError("必須項目を入力してください。");
-      setIsSending(false);
+    setFormStatus("loading");
+    setErrorMessages({});
+
+    let hasError = false;
+    const newErrorMessages: {
+      name?: string;
+      email?: string;
+      message?: string;
+    } = {};
+
+    if (!name.trim()) {
+      newErrorMessages.name = "お名前をご入力ください。";
+      hasError = true;
+    }
+    if (!email.trim()) {
+      newErrorMessages.email = "メールアドレスをご入力ください。";
+      hasError = true;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrorMessages.email = "有効なメールアドレス形式でご入力ください。";
+      hasError = true;
+    }
+    if (!message.trim()) {
+      newErrorMessages.message = "お問い合わせ内容をご入力ください。";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrorMessages(newErrorMessages);
+      setFormStatus("error");
       return;
     }
-    setError(null);
+
     try {
-      const res = await fetch("/api/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ name, email, message }),
       });
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.message || "送信に失敗しました。");
-        setIsSending(false);
-        return;
-      }
-      setSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      setError("送信中にエラーが発生しました。");
-      setIsSending(false);
-    }
-  };
 
-  const handleReset = () => {
-    setForm({ name: "", email: "", tel: "", category: "", message: "" });
-    setSubmitted(false);
-    setIsSending(false);
+      if (response.ok) {
+        setFormStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
   };
 
   return (
-    <div className="relative min-h-screen bg-base py-20 px-4 flex items-center overflow-x-hidden">
-      <Particles className="fixed inset-0 z-0 pointer-events-none" />
-      <section className="relative max-w-2xl w-full mx-auto rounded-3xl bg-white p-10 md:p-14 shadow-2xl border border-base-foreground/10 z-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-base-foreground mb-10 tracking-wide">
-          応募フォーム
-        </h1>
-        {submitted ? (
-          <div className="text-center space-y-8">
-            <div className="text-green-600 text-xl font-bold">
-              ご応募ありがとうございました。担当者より追ってご連絡いたします。
-            </div>
-            <button
-              onClick={handleReset}
-              className="px-8 py-3 bg-gradient-to-r from-blue-400 to-blue-600 text-white text-lg font-bold rounded-full shadow hover:scale-105 transition"
-            >
-              再入力する
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <input
-              type="text"
-              placeholder="お名前 *"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-6 py-4 rounded-xl bg-base border border-base-foreground/20 text-base-foreground placeholder:text-muted-foreground focus:border-blue-400 focus:ring-2 focus:ring-blue-200 outline-none transition"
-              required
-            />
-            <input
-              type="email"
-              placeholder="メールアドレス *"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full px-6 py-4 rounded-xl bg-base border border-base-foreground/20 text-base-foreground placeholder:text-muted-foreground focus:border-blue-400 focus:ring-2 focus:ring-blue-200 outline-none transition"
-              required
-            />
-            <input
-              type="tel"
-              placeholder="電話番号"
-              value={form.tel}
-              onChange={(e) => setForm({ ...form, tel: e.target.value })}
-              className="w-full px-6 py-4 rounded-xl bg-base border border-base-foreground/20 text-base-foreground placeholder:text-muted-foreground focus:border-blue-400 focus:ring-2 focus:ring-blue-200 outline-none transition"
-            />
-            <div className="space-y-3">
-              {categories.map((c) => (
-                <label
-                  key={c.value}
-                  className="flex items-center gap-2 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    name="category"
-                    value={c.value}
-                    checked={form.category === c.value}
-                    onChange={(e) =>
-                      setForm({ ...form, category: e.target.value })
-                    }
-                    className="accent-blue-500 w-5 h-5"
-                    required
-                  />
-                  <span className="text-base-foreground font-medium">
-                    {c.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-            <textarea
-              placeholder="備考・ご質問"
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              className="w-full px-6 py-4 rounded-xl bg-base border border-base-foreground/20 text-base-foreground placeholder:text-muted-foreground focus:border-blue-400 focus:ring-2 focus:ring-blue-200 outline-none transition"
-              rows={5}
-            />
-            {error && <div className="text-red-500 font-bold">{error}</div>}
-            <button
-              type="submit"
-              disabled={isSending}
-              className={`w-full py-4 rounded-full font-bold text-white shadow-lg transition-all ${
-                isSending
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:scale-105 hover:brightness-110"
-              }`}
-            >
-              {isSending ? "送信中..." : "送信する"}
-            </button>
+    <section className="relative bg-[#ededed] text-[#232323] py-28 px-6 overflow-hidden">
+      {/* === 背景装飾（微光グラデーション） === */}
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.6),transparent_80%)]"
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-            {/* プライバシー注記 */}
-            <p className="mt-6 text-xs leading-relaxed text-neutral-500">
-              ※ いただいたご相談内容は厳重に管理し、目的外利用はいたしません。
-              状況により弁護士同席や警察相談のご案内も可能です。
+      {/* === タイトル === */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="relative z-10 text-center mb-16"
+      >
+        <h2 className="text-5xl font-extrabold text-[#111] tracking-tight mb-4">
+          お問い合わせ
+        </h2>
+        <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          合同会社LITへのご相談・お見積もり・採用・取材に関するご連絡は
+          下記フォームよりお送りください。  
+          内容を確認のうえ、担当者よりご返信いたします。
+        </p>
+      </motion.div>
+
+      {/* === フォーム === */}
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, scale: 0.97 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="relative z-10 max-w-3xl mx-auto bg-white rounded-3xl shadow-lg border border-neutral-200 p-10 space-y-6"
+      >
+        {/* お名前 */}
+        <div>
+          <label htmlFor="name" className="block font-semibold mb-2">
+            お名前
+          </label>
+          <div className="relative">
+            <FaUser className="absolute left-3 top-3 text-gray-400" />
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="例：山田 太郎"
+              className={`w-full pl-10 py-3 border ${
+                errorMessages.name ? "border-red-400" : "border-gray-300"
+              } rounded-lg bg-gray-50 text-[#232323] placeholder-gray-400 focus:outline-none focus:border-gray-600 transition-all`}
+            />
+          </div>
+          {errorMessages.name && (
+            <p className="text-red-500 text-sm mt-1">{errorMessages.name}</p>
+          )}
+        </div>
+
+        {/* メールアドレス */}
+        <div>
+          <label htmlFor="email" className="block font-semibold mb-2">
+            メールアドレス
+          </label>
+          <div className="relative">
+            <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="例：info@lit4.net"
+              className={`w-full pl-10 py-3 border ${
+                errorMessages.email ? "border-red-400" : "border-gray-300"
+              } rounded-lg bg-gray-50 text-[#232323] placeholder-gray-400 focus:outline-none focus:border-gray-600 transition-all`}
+            />
+          </div>
+          {errorMessages.email && (
+            <p className="text-red-500 text-sm mt-1">{errorMessages.email}</p>
+          )}
+        </div>
+
+        {/* メッセージ */}
+        <div>
+          <label htmlFor="message" className="block font-semibold mb-2">
+            お問い合わせ内容
+          </label>
+          <div className="relative">
+            <FaComment className="absolute left-3 top-3 text-gray-400" />
+            <textarea
+              id="message"
+              rows={6}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="例：Webサイト制作・システム開発の相談など"
+              className={`w-full pl-10 py-3 border ${
+                errorMessages.message ? "border-red-400" : "border-gray-300"
+              } rounded-lg bg-gray-50 text-[#232323] placeholder-gray-400 focus:outline-none focus:border-gray-600 transition-all`}
+            />
+          </div>
+          {errorMessages.message && (
+            <p className="text-red-500 text-sm mt-1">
+              {errorMessages.message}
             </p>
-          </form>
+          )}
+        </div>
+
+        {/* ボタン */}
+        <motion.button
+          type="submit"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          disabled={formStatus === "loading"}
+          className={`w-full py-3 rounded-full font-bold text-lg flex items-center justify-center bg-[#232323] text-white hover:bg-white hover:text-[#232323] border border-[#232323] transition-all duration-300 ${
+            formStatus === "loading"
+              ? "opacity-70 cursor-not-allowed"
+              : "hover:shadow-md"
+          }`}
+        >
+          {formStatus === "loading" ? (
+            <div className="animate-spin h-5 w-5 border-t-2 border-b-2 border-white rounded-full" />
+          ) : (
+            <>
+              送信する
+              <FaPaperPlane className="ml-2" />
+            </>
+          )}
+        </motion.button>
+
+        {/* 結果メッセージ */}
+        {formStatus === "success" && (
+          <p className="text-green-600 text-center mt-3">
+            ✅ 送信が完了しました。担当者よりご連絡いたします。
+          </p>
         )}
-      </section>
-    </div>
+        {formStatus === "error" && (
+          <p className="text-red-600 text-center mt-3">
+            ⚠️ 送信に失敗しました。内容をご確認ください。
+          </p>
+        )}
+      </motion.form>
+    </section>
   );
 }

@@ -95,10 +95,10 @@ const Header = () => {
                     grad="from-rose-800/80 via-red-500/50 to-transparent"
                   />
                   <ServiceCard
-                    href="https://lit4.net/"
+                    href="https://lit-studio-hp.vercel.app/"
                     title="LIT STUDIO"
-                    subtitle="Web制作・映像制作（coming soon）"
-                    src="/images/litstudio.jpg"
+                    subtitle="Web制作・映像制作"
+                    src="litstudio.logo.png"
                     grad="from-indigo-800/80 via-purple-600/50 to-transparent"
                   />
                 </div>
@@ -234,7 +234,7 @@ const Header = () => {
                   味扉（飲食）
                 </Link>
                 <Link
-                  href="https://lit4.net/"
+                  href="https://lit-studio-hp.vercel.app/"
                   target="_blank"
                   className="text-sm hover:text-emerald-700"
                 >

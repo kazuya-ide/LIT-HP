@@ -19,38 +19,14 @@ export default function CompanyInformation() {
     },
   ];
 
-  const subCompanies = [
-    {
-      name: "北海工務店（建設・不動産）",
-      desc: "住宅・店舗・オフィスの建築・リフォームを通じて地域の街づくりを支えます。信頼と技術で快適な暮らしを実現。",
-      image: "/hokkaikoumutenn.logo.jpg",
-      link: "https://www.sapporo-builderr.com/",
-      grad: "from-amber-800 to-yellow-500",
-    },
-    {
-      name: "味扉 AJITO（飲食サービス）",
-      desc: "すすきのの隠れ家的ダイニング。創作料理とこだわりの空間で、心に残る特別なひとときを。",
-      image: "/ajito.logo.jpg",
-      link: "https://www.hotpepper.jp/strJ003324016/",
-      grad: "from-rose-800 to-red-500",
-    },
-    {
-      name: "LIT STUDIO（IT・Webサービス）",
-      desc: "Web制作・ECサイト構築・アプリ開発を通じて企業のDXを支援。AIとテクノロジーで次世代のWebを創造します。",
-      image: "/images/litstudio.jpg",
-      link: "https://lit4.net/",
-      grad: "from-indigo-700 to-purple-600",
-    },
-  ];
-
   return (
     <section
-      className="w-full bg-[#ededed] py-20 px-6 md:px-12"
+      className="w-full bg-[#f6f6f6] px-6 md:px-12 border-t border-neutral-300"
       aria-labelledby="group-company-title"
     >
       <div className="max-w-7xl mx-auto">
         {/* --- 見出し --- */}
-        <div className="text-center mb-16">
+        <div className="text-center pt-16 pb-12">
           <span className="text-xs font-bold uppercase text-gray-500 tracking-widest">
             COMPANY INFORMATION
           </span>
@@ -67,14 +43,14 @@ export default function CompanyInformation() {
         </div>
 
         {/* === メイン2社（LSA & L.SECURITY） === */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {mainCompanies.map((c) => (
             <Link
               key={c.name}
               href={c.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative h-[400px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+              className="group relative h-[380px] rounded-none overflow-hidden hover:shadow-2xl transition-all duration-500 border-t border-neutral-200"
             >
               <Image
                 src={c.image}
@@ -91,48 +67,17 @@ export default function CompanyInformation() {
                   {c.desc}
                 </p>
               </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-white group-hover:w-full transition-all duration-500" />
-            </Link>
-          ))}
-        </div>
-
-        {/* === サブ3社 === */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {subCompanies.map((c) => (
-            <Link
-              key={c.name}
-              href={c.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative h-[300px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500"
-            >
-              <Image
-                src={c.image}
-                alt={c.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div
-                className={`absolute inset-0 bg-gradient-to-t ${c.grad} opacity-85 group-hover:opacity-90 transition-all duration-500`}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h4 className="text-2xl font-bold mb-2">{c.name}</h4>
-                <p className="text-sm text-gray-100 leading-relaxed line-clamp-3">
-                  {c.desc}
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-500" />
             </Link>
           ))}
         </div>
 
         {/* === CTAボタン === */}
-        <div className="text-center mt-20">
+        <div className="text-center border-t border-neutral-300 bg-white py-12 mt-0">
           <Link
-            href="/group-companies"
+            href="/services"
             className="inline-block px-10 py-4 bg-[#232323] text-white text-lg font-bold rounded-full shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
-            グループ一覧を見る
+            グループ一覧
           </Link>
         </div>
       </div>
