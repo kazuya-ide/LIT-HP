@@ -1,7 +1,9 @@
+// ./app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/app/components/Header/MyHeader";
 import FooterWrapper from "@/app/components/FooterWrapper";
+import Script from "next/script"; // GA & JSON-LD を next/script で管理
 
 // ✅ メタデータ（SEO / OGP / SNS対応）
 export const metadata: Metadata = {
@@ -30,14 +32,8 @@ export const metadata: Metadata = {
     siteName: "合同会社LIT",
     locale: "ja_JP",
     type: "website",
-    // ✅ ここがポイント：OGP未指定時に default-ogp.jpg を使う
     images: [
-      {
-        url: "/default-ogp.jpg", // ← デフォルト画像
-        width: 1200,
-        height: 630,
-        alt: "合同会社LIT公式サイト",
-      },
+      { url: "/default-ogp.jpg", width: 1200, height: 630, alt: "合同会社LIT公式サイト" },
     ],
   },
   twitter: {
@@ -45,18 +41,14 @@ export const metadata: Metadata = {
     title: "合同会社LIT｜北海道の地域を支えるWeb・警備・開発事業",
     description:
       "北海道札幌の合同会社LITは、Web制作・警備・開発事業で地域社会に貢献しています。",
-    images: ["/default-ogp.jpg"], // ← デフォルト画像を指定
+    images: ["/default-ogp.jpg"],
     creator: "@lit_official",
   },
-  alternates: {
-    canonical: "https://lit4.net",
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  alternates: { canonical: "https://lit4.net" },
+  icons: { icon: "/favicon.ico" },
 };
 
-// ✅ JSON-LD 構造化データ（組織スキーマ）
+// ✅ JSON-LD 構造化データ（Organization）
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -81,41 +73,38 @@ const jsonLd = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // なぜ: 本番でIDを秘匿しやすくし、環境差分にも対応
+  const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ZVXV0K9HJC";
+
   return (
     <html lang="ja">
       <head>
-        {/* ✅ 構造化データ（JSON-LD） */}
-        <script
+        {/* ✅ JSON-LD（Lint対策：next/scriptを使用） */}
+        <Script
+          id="ld-json"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* ✅ Google Analytics 4 トラッキングコード */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZVXV0K9HJC"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-ZVXV0K9HJC', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
+        {/* ✅ Google Analytics 4（Lint対策：next/script） */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
         />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+          `}
+        </Script>
       </head>
 
       <body className="bg-[#f7f7f7] text-[#232323] antialiased min-h-screen font-sans">
-        {/* ✅ ヘッダーで隠れないように上マージン確保 */}
+        {/* ヘッダーで隠れないように上マージン確保 */}
         <div className="pt-[80px]">
           <Header />
           <main className="min-h-[70vh]">{children}</main>
