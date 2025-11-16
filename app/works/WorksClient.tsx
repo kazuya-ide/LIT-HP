@@ -11,13 +11,13 @@ export default function WorksClient() {
       id: "lsecurity",
       title: "L.SECURITY（警備・防犯事業）",
       description:
-        "札幌市内を中心に官公庁・商業施設・イベントなどの常駐警備、機械警備、交通誘導業務を展開。SECOMとの提携により、高品質な安全体制を実現しています。",
+        "北海道全域で官公庁・商業施設・イベントなどの常駐警備、機械警備、交通誘導業務、身辺警護を展開。高品質な安全体制を実現しています。",
       image: "/Lsecurity.jpg",
       link: "https://l-security-lit.com/",
       points: [
         "年間500件以上の警備実績",
-        "SECOMシステム導入施設対応",
-        "札幌市内・近郊を中心に警備展開",
+        "高品質な身辺警護を提供",
+        "北海道全域で警備業を展開",
       ],
     },
     {
@@ -28,7 +28,7 @@ export default function WorksClient() {
       image: "/LSArogo.jpg",
       link: "https://lsa.lit4.net/",
       points: [
-        "年間調査件数100件以上",
+        "驚愕の調査失敗回数０回",
         "弁護士・法務機関との連携実績",
         "最新機材による調査・撮影",
       ],
@@ -37,20 +37,20 @@ export default function WorksClient() {
       id: "hokkai",
       title: "北海工務店（建設・不動産事業）",
       description:
-        "住宅・店舗・オフィスの建築・リフォームを手がける地域密着型工務店。不動産管理や耐震リフォームなど、確かな施工品質で信頼を得ています。",
+        "住宅・店舗・オフィスの建築・リフォームを手がける地域密着型工務店。ビルメンテナンスや清掃業でも確かな施工品質で信頼を得ています。",
       image: "/hokkaikoumutenn.logo.jpg",
       link: "https://www.sapporo-builderr.com/",
       points: [
-        "年間30件以上の施工・改修実績",
-        "戸建・店舗・オフィス対応",
-        "不動産管理・耐震リフォーム対応",
+        "年間100件以上の施工・改修実績",
+        "戸建・店舗・オフィスリフォーム対応",
+        "ビルメンテナンス、清掃業まで",
       ],
     },
     {
       id: "ajito",
       title: "味扉 AJITO（飲食事業）",
       description:
-        "すすきのの隠れ家的創作ダイニング。旬の食材を使用したこだわり料理と上質な空間で、特別な時間を提供します。雑誌・TVなど各種メディア掲載実績も。",
+        "札幌月寒の隠れ家的創作ダイニング。旬の食材を使用したこだわり料理と上質な空間で、特別な時間を提供します。雑誌・TVなど各種メディア掲載実績も。",
       image: "/ajito.logo.jpg",
       link: "https://www.hotpepper.jp/strJ003324016/",
       points: [

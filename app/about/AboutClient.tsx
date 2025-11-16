@@ -77,7 +77,7 @@ export default function AboutClient() {
           {[
             {
               name: "L.SECURITY",
-              desc: "官公庁・商業施設・イベントなど幅広い現場で警備・防犯サービスを提供。機械警備から交通誘導まで、安全のプロフェッショナルとして信頼を築いています。",
+              desc: "官公庁・商業施設・イベントなど幅広い現場で警備・防犯サービスを提供。北海道全域で機械警備、交通誘導、要人警護まで安全のプロフェッショナルとして信頼を築いています。",
               img: "/Lsecurity.jpg",
             },
             {
@@ -87,12 +87,12 @@ export default function AboutClient() {
             },
             {
               name: "北海工務店",
-              desc: "新築住宅・リフォーム・不動産管理を中心に、地域密着型の建設・不動産事業を展開。信頼の施工品質で暮らしの安心を支えます。",
+              desc: "新築住宅・リフォームを中心に、地域密着型の建設事業を展開。信頼の施工品質で暮らしの安心を支えます。",
               img: "/hokkaikoumutenn.logo.jpg",
             },
             {
               name: "味扉 AJITO",
-              desc: "札幌・すすきのの隠れ家的ダイニング。創作料理と厳選ドリンクで特別なひとときを提供し、地域に愛される飲食空間を創造しています。",
+              desc: "札幌・豊平月寒の隠れ家的ダイニング。創作料理と厳選ドリンクで特別なひとときを提供し、地域に愛される飲食空間を創造しています。",
               img: "/ajito.logo.jpg",
             },
             {
@@ -146,26 +146,22 @@ export default function AboutClient() {
             </div>
             <div>
               <dt className="font-semibold text-gray-900">所在地</dt>
-              <dd>〒063-0841 北海道札幌市西区八軒1条西1丁目</dd>
+              <dd>	〒063-0061
+北海道札幌市西区西町北１４丁目１−１５
+ホクシンビル３F</dd>
             </div>
             <div>
               <dt className="font-semibold text-gray-900">代表者</dt>
               <dd>代表  堀内　勝</dd>
             </div>
-            <div>
-              <dt className="font-semibold text-gray-900">設立</dt>
-              <dd>2023年（令和5年）</dd>
-            </div>
+          
             <div>
               <dt className="font-semibold text-gray-900">事業内容</dt>
               <dd>
-                警備業・建設業・IT／Web開発・飲食事業・探偵業・コンサルティング
+                警備業・探偵業・建設業・Web開発・飲食事業・コンサルティング
               </dd>
             </div>
-            <div>
-              <dt className="font-semibold text-gray-900">主要取引銀行</dt>
-              <dd>北洋銀行 札幌西支店</dd>
-            </div>
+          
             <div className="md:col-span-2">
               <dt className="font-semibold text-gray-900">企業ビジョン</dt>
               <dd>
@@ -191,7 +187,7 @@ export default function AboutClient() {
           <ul className="space-y-4 text-gray-700 text-lg leading-relaxed">
             <li>警備業認定：北海道公安委員会 第10000877号</li>
             <li>探偵業届出：北海道公安委員会 第10240005号</li>
-            <li>建設業許可：（般-3）石 第24101号（北海工務店）</li>
+           
             <li>食品衛生責任者：登録済（社内有資格者）</li>
           </ul>
         </div>

@@ -23,12 +23,17 @@ export default function MainVisual() {
     show: {
       opacity: 1,
       x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 70,
-        damping: 14,
-        mass: 0.9,
-      },
+      transition: { type: "spring", stiffness: 70, damping: 14, mass: 0.9 },
+    },
+  };
+
+  // 強調リードのフェード
+  const leadVariant = {
+    hidden: { opacity: 0, y: 6 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.08, duration: 0.35, ease: "easeOut" },
     },
   };
 
@@ -38,21 +43,13 @@ export default function MainVisual() {
       opacity: 1,
       scale: 1,
       x: 0,
-      transition: {
-        delay: 0.35,
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { delay: 0.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   const badgeVariant = {
     hidden: { opacity: 0, y: 10 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { delay: 0.65, duration: 0.4 },
-    },
+    show: { opacity: 1, y: 0, transition: { delay: 0.65, duration: 0.4 } },
   };
 
   return (
@@ -66,15 +63,21 @@ export default function MainVisual() {
           viewport={{ once: true, amount: 0.35 }}
           variants={textWhole}
         >
-          <h1 className="text-3xl md:text-5xl font-medium leading-relaxed mb-8">
-            北海道の「安全」と「真実」を     守り抜くために。
+          <h1 className="text-3xl md:text-5xl font-medium leading-relaxed mb-6">
+            北海道の「安全」と「真実」を守り抜くために。
             <br className="hidden md:block" />
-       
           </h1>
 
-          <p className="text-[15px] leading-7 text-gray-700 mb-10">
-            公安委員会の認定を受け、警察OBや元刑事が複数在籍する専門チームが、<br />
-            地域を守り、調査を支えています。<br />
+          {/* 強調リード */}
+          <motion.p
+            variants={leadVariant}
+            className="mb-6 text-[18px] md:text-[22px] font-extrabold leading-snug tracking-wide"
+          >
+            公安委員会の認定を受け、警察OBや元刑事が複数在籍。
+          </motion.p>
+
+          <p className="text-[15px] leading-7 text-gray-700 mb-8">
+            専門チームが地域を守り、警備、調査を支えています。<br />
             <br />
             経験に裏打ちされた判断力と、最先端AIテクノロジーを掛け合わせ、<br />
             監視・分析・調査・対応のすべてをより正確に、より迅速に。<br />
@@ -85,19 +88,38 @@ export default function MainVisual() {
             私たち合同会社LITは進化し続けます。
           </p>
 
-          <motion.div
-            whileHover={{ y: reduce ? 0 : -2, boxShadow: reduce ? undefined : "0 8px 24px rgba(0,0,0,0.12)" }}
-            whileTap={{ scale: reduce ? 1 : 0.98 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="inline-block rounded-full"
-          >
-            <Link
-              href="/about"
-              className="inline-block border border-[#232323] rounded-full px-8 py-3 text-sm font-medium hover:bg-[#232323] hover:text-white transition"
+          {/* CTA：2ボタン（SP縦/PC横） */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <motion.div
+              whileHover={{ y: reduce ? 0 : -2, boxShadow: reduce ? undefined : "0 8px 24px rgba(0,0,0,0.12)" }}
+              whileTap={{ scale: reduce ? 1 : 0.98 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="inline-block rounded-full"
             >
-              LITについて詳しく →
-            </Link>
-          </motion.div>
+              <Link
+                href="/about"
+                className="inline-block border border-[#232323] rounded-full px-8 py-3 text-sm font-medium hover:bg-[#232323] hover:text-white transition"
+                aria-label="LITについて詳しく"
+              >
+                LITについて詳しく →
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ y: reduce ? 0 : -2, boxShadow: reduce ? undefined : "0 8px 24px rgba(0,0,0,0.12)" }}
+              whileTap={{ scale: reduce ? 1 : 0.98 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="inline-block rounded-full"
+            >
+              <Link
+                href="/about/psc"
+                className="inline-block border border-[#232323] rounded-full px-8 py-3 text-sm font-bold hover:bg-[#232323] hover:text-white transition"
+                aria-label="公安委員会とは"
+              >
+                公安委員会とは →
+              </Link>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* 右：写真 */}
