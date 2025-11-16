@@ -104,8 +104,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="bg-[#f7f7f7] text-[#232323] antialiased min-h-screen font-sans">
-        {/* ヘッダーで隠れないように上マージン確保 */}
-        <div className="pt-[80px]">
+        {/* ✅ 固定ヘッダー分の余白をレイアウト側で吸収
+            SP: 44px + 安全域 / PC: 80px 固定 */}
+        <div className="
+            pt-[calc(env(safe-area-inset-top)+44px)]
+            md:pt-20
+          ">
           <Header />
           <main className="min-h-[70vh]">{children}</main>
           <FooterWrapper />

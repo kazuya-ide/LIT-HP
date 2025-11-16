@@ -1,125 +1,152 @@
+// app/components/Hero.tsx
 "use client";
 
-
+import { useEffect, useState } from "react";
 
 const BG_URL = "/Herosection.jpg";
 
 export default function Hero() {
+  const [ready, setReady] = useState(false);
+
+  // 画像プリロード後にアニメ開始
+  useEffect(() => {
+    const img = new Image();
+    img.src = BG_URL;
+    if (img.complete) setReady(true);
+    else {
+      img.onload = () => setReady(true);
+      img.onerror = () => setReady(true); // 失敗時も崩さない
+    }
+  }, []);
+
   return (
-    <section
-      className="relative w-full min-h-[100svh] overflow-hidden [perspective:1400px]"
-      aria-label="Hero"
-    >
-      {/* === ✨ ローカルCSS（globals.css 不要） === */}
+    <section className="w-full" aria-label="Hero">
       <style>{`
-        /* 各ページめくりアニメーション */
+        .will-transform { will-change: transform; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; transform-style: preserve-3d; }
+
+        /* めくり（ゆっくり） */
         @keyframes turnPage {
-          0%   { transform: rotateY(0deg);   }
+          0%   { transform: rotateY(0deg); }
           45%  { transform: rotateY(-160deg); }
           100% { transform: rotateY(-180deg); }
         }
-        .animate-turn {
-          animation: turnPage 2s ease-in-out forwards;
-        }
+        /* 各レイヤーの回転時間を 2.4s に */
+        .animate-turn { animation: turnPage var(--dur,2.4s) ease-in-out forwards; }
 
-        /* 背景のゆっくりパララックス */
-        @keyframes panBg {
-          0%   { transform: scale(1.05) translateX(0); }
-          50%  { transform: scale(1.08) translateX(-1.5%); }
-          100% { transform: scale(1.05) translateX(0); }
-        }
-        .animate-pan {
-          animation: panBg 22s ease-in-out infinite;
-        }
-
-        /* 光のハイライトライン */
+        /* 光筋 */
         @keyframes shine {
-          0%   { opacity: 0; transform: translateX(-100%) rotate(25deg); }
-          50%  { opacity: 0.8; }
-          100% { opacity: 0; transform: translateX(120%) rotate(25deg); }
+          0%   { opacity: 0; transform: translateX(-120%) rotate(25deg); }
+          50%  { opacity: .8; }
+          100% { opacity: 0; transform: translateX(140%) rotate(25deg); }
         }
-        .animate-shine {
-          animation: shine 1.4s ease-out forwards;
-        }
+        .animate-shine { animation: shine 1.3s ease-out forwards; }
 
-        /* キャッチコピー出現 */
+        /* テキスト出現（前倒し） */
         @keyframes fadeUp {
-          0%   { opacity: 0; transform: translateY(20px); }
+          0%   { opacity: 0; transform: translateY(14px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-copy {
-          animation: fadeUp 1.2s ease-out forwards;
-          animation-delay: 2.1s;
-        }
+        .animate-copy { animation: fadeUp .6s ease-out forwards; }
 
-        /* Scroll down の矢印上下 */
-        @keyframes scrollArrow {
-          0%,100% { transform: translateY(0); }
-          50%     { transform: translateY(6px); }
-        }
-        .animate-arrow {
-          animation: scrollArrow 1.6s ease-in-out infinite;
+        @media (prefers-reduced-motion: reduce) {
+          .animate-turn, .animate-shine, .animate-copy { animation: none !important; }
         }
       `}</style>
 
-      {/* === BG3：最終静止＋パララックス === */}
-      <div
-        className="absolute inset-0 -z-10 bg-center bg-cover animate-pan"
-        style={{ backgroundImage: `url(${BG_URL})` }}
-      />
+      {/* 画像ブロック（切り抜きなし / 高さは画像で決定） */}
+      <figure className="relative w-full overflow-hidden">
+        {/* ベース画像（高さの基準） */}
+        <img
+          src={BG_URL}
+          alt=""
+          className="block w-full h-auto object-contain select-none"
+          draggable={false}
+          decoding="async"
+        />
 
-      {/* === BG2：めくり（2回目） === */}
+        {/* ロード後のみ：3回めくり（ベース画像の上に重ねる） */}
+        {ready && (
+          <>
+            {/* 1枚目（最前面） */}
+            <TurnLayer z="z-30" delay="0.4s" shine="0.55" />
+            {/* 2枚目 */}
+            <TurnLayer z="z-20" delay="3.0s" shine="0.60" />
+            {/* 3枚目 */}
+            <TurnLayer z="z-10" delay="5.6s" shine="0.65" />
+          </>
+        )}
+      </figure>
+
+      {/* テキスト（画像の下）— 表示を早める */}
       <div
-        className="absolute inset-0 z-10 bg-center bg-cover origin-right backface-hidden animate-turn"
-        style={{ backgroundImage: `url(${BG_URL})`, animationDelay: "3.3s" }}
+        className="max-w-5xl mx-auto px-6 md:px-8 pt-5 md:pt-7 opacity-0 animate-copy"
+        style={{ animationDelay: ready ? "0.9s" : "0s" }}
       >
-        {/* 光のエフェクト */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-0 w-2 h-full bg-white/60 blur-xl opacity-0 animate-shine" />
-        </div>
-      </div>
-
-      {/* === BG1：めくり（1回目） === */}
-    <div
-  className="absolute inset-0 z-20 bg-center bg-cover origin-right backface-hidden animate-turn"
-  style={{
-    backgroundImage: `url(${BG_URL})`,
-    animationDelay: "0.8s",
-  }}
->
-        {/* 光のエフェクト */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-0 w-2 h-full bg-white/50 blur-xl opacity-0 animate-shine" />
-        </div>
-      </div>
-
-      {/* === キャッチコピー === */}
-      <div className="absolute bottom-8 left-6 md:bottom-14 md:left-14 pointer-events-none opacity-0 animate-copy">
-        <p className="text-white/95 drop-shadow-lg text-2xl md:text-4xl font-semibold tracking-wide">
-          LIT GROUP  
-
-        </p>
-        <p className="mt-1 text-white/85 text-sm md:text-lg tracking-wide drop-shadow-md">
-        ―― LIFE × INNOVATION × TRUST<br/> 信頼が、未来を動かす。
+        <h1 className="text-2xl md:text-4xl font-semibold tracking-wide text-[#111]">
+          LIT 
+        </h1>
+        <p className="mt-2 text-sm md:text-lg text-[#444] leading-relaxed">
+          ―― LIFE × INNOVATION × TRUST<br />
+          信頼が、未来を動かす。
         </p>
       </div>
 
-      {/* === Scroll Down === */}
-      <div className="absolute bottom-8 right-6 md:bottom-14 md:right-14 flex items-center gap-2 pointer-events-none select-none">
-        <span className="text-white/85 drop-shadow text-xs md:text-sm uppercase tracking-[.25em]">
-          scroll down
-        </span>
-        <svg
-          className="size-5 md:size-7 stroke-white animate-arrow"
-          viewBox="0 0 24 24"
-          fill="none"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
+      {/* スクロールダウン（テキストのさらに下） */}
+      <div className="max-w-5xl mx-auto px-6 md:px-8">
+        <div className="flex items-center gap-2 pt-6 md:pt-8 pb-8 select-none">
+          <span className="text-xs md:text-sm uppercase tracking-[.25em] text-gray-600">
+            scroll down
+          </span>
+          <svg
+            className="size-5 md:size-6 stroke-gray-700"
+            viewBox="0 0 24 24"
+            fill="none"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ===== サブコンポーネント ===== */
+
+function TurnLayer({
+  z,
+  delay,
+  shine = "0.6",
+}: {
+  z: string;
+  delay: string;
+  shine?: string;
+}) {
+  return (
+    <div
+      className={`absolute inset-0 ${z} origin-right backface-hidden will-transform pointer-events-none animate-turn`}
+      style={{ animationDelay: delay } as React.CSSProperties}
+      aria-hidden="true"
+    >
+      {/* 重ねる画像（containで切り抜き無し） */}
+      <img
+        src={BG_URL}
+        alt=""
+        className="block w-full h-full object-contain select-none"
+        draggable={false}
+        decoding="async"
+      />
+
+      {/* 光エフェクト（控えめ） */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute top-0 left-0 w-2 h-full bg-white blur-xl opacity-0 animate-shine"
+          style={{ opacity: shine as unknown as number }}
+        />
+      </div>
+    </div>
   );
 }
