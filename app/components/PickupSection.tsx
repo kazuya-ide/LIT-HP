@@ -15,7 +15,7 @@ export default function PickupSection() {
       subtitle: "「守る美学。見抜く哲学。」",
       img: "/Lsecurity.jpg",
       href: "https://l-security-lit.com/",
-      detailHref: "https://l-security-lit.com/services",
+      detailHref: "https://l-security-lit.com/business",
       imageScale: "scale-[0.60]",
       imageHover: "group-hover:scale-[0.65]",
       button1: "公式サイトへ →",

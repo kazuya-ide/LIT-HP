@@ -6,10 +6,10 @@ import Link from "next/link";
 
 const companies = [
   { name: "L.SECURITY", href: "https://l-security-lit.com", img: "/Lsecurity.jpg" },
-  { name: "L・Secret Agent", href: "https://l-secret-agent.com", img: "/LSArogo.jpg" },
-  { name: "北海工務店", href: "https://hokkai-koumuten.com", img: "/hokkaikoumutenn.logo.jpg" },
-  { name: "味扉 AJITO", href: "https://ajito-sapporo.com", img: "/ajito.logo.jpg" },
-  { name: "LIT STUDIO", href: "https://lit4.net/litstudio", img: "/litstudio.logo.png" },
+  { name: "L・Secret Agent", href: "https://lsa.lit4.net/", img: "/LSArogo.jpg" },
+  { name: "北海工務店", href: "https://www.sapporo-builderr.com/", img: "/hokkaikoumutenn.logo.jpg" },
+  { name: "味扉 AJITO", href: "https://www.hotpepper.jp/strJ003324016/", img: "/ajito.logo.jpg" },
+  { name: "LIT STUDIO", href: "https://lit-studio-hp.vercel.app/", img: "/litstudio.logo.png" },
 ];
 
 export default function OtherContentsFullRow() {

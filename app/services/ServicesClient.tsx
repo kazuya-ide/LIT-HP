@@ -40,7 +40,7 @@ export default function ServicesClient() {
       description:
         "札幌月寒の隠れ家的ダイニング。創作料理と厳選ドリンクで、特別なひとときを演出します。",
       image: "/ajito.logo.jpg",
-      url: "https://www.hotpepper.jp/strJ003500304/",
+      url: "https://www.hotpepper.jp/strJ003324016/",
       tags: ["飲食業", "創作料理", "月寒"],
     },
     {

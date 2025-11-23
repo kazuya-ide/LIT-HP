@@ -2,16 +2,16 @@
 
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";
+import HeroWinterSolution from "./components/HeroWinterSolution";
+import ServiceSummary from "./components/ServiceSummary";
+import FlowAndPlan from "./components/FlowAndPlan";
 
-// === 以前の構成に戻す import ===
-
-import Hero from "./components/Hero";
 import MainVisual from "./components/MainVisual";
 import LitStorySection from "./components/LitStorySection";
 import PickupSection from "./components/PickupSection";
 import ProductsSection from "./components/ProductsSection";
 import OtherContents from "./components/OtherContentsSection";
-
+import HeroSection from "./components/Herosection";
 // === SEO ===
 export const metadata: Metadata = createMetadata({
   title: "北海道札幌の警備・建設・IT・飲食事業｜合同会社LIT",
@@ -26,8 +26,8 @@ export default function Home() {
     <main className="relative overflow-x-hidden bg-white text-[#232323]">
 
       {/* === 1. メインビジュアル（旧 HomeMain） === */}
-      <Hero />
    
+   <HeroSection/>
       {/* === 2. 大きめのメインビジュアル === */}
       <MainVisual />
 
@@ -42,7 +42,10 @@ export default function Home() {
 
       {/* === 7. その他コンテンツ（ブログ等） === */}
       <OtherContents />
-
+      
+  <HeroWinterSolution />
+      <ServiceSummary />
+      <FlowAndPlan />
       {/* === Schema.org === */}
       <script
         type="application/ld+json"

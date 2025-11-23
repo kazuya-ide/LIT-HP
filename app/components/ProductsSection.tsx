@@ -23,7 +23,7 @@ export default function ProductsSection() {
       jpTitle: "北海工務店",
       desc: "地域に根ざした建築・リフォーム事業。住まいづくりから建物修繕まで、“確かな施工”と“誠実な対応”で価値ある暮らしを支えます。",
       img: "/hokkaikoumutenn.logo.jpg",
-      href: "https://hokkai-koumuten.com",
+      href: "https://www.sapporo-builderr.com/",
     },
   ];
 
