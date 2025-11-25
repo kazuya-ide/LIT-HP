@@ -2,14 +2,14 @@
 
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";
-
+import HeroShowcase from "./components/HeroShowcase";
 
 import MainVisual from "./components/MainVisual";
 import LitStorySection from "./components/LitStorySection";
 import PickupSection from "./components/PickupSection";
 import ProductsSection from "./components/ProductsSection";
 import OtherContents from "./components/OtherContentsSection";
-import HeroSection from "./components/Herosection";
+
 // === SEO ===
 export const metadata: Metadata = createMetadata({
   title: "北海道札幌の警備・建設・IT・飲食事業｜合同会社LIT",
@@ -24,8 +24,9 @@ export default function Home() {
     <main className="relative overflow-x-hidden bg-white text-[#232323]">
 
       {/* === 1. メインビジュアル（旧 HomeMain） === */}
-   
-   <HeroSection/>
+   <HeroShowcase />
+
+ 
       {/* === 2. 大きめのメインビジュアル === */}
       <MainVisual />
 
