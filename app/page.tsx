@@ -1,10 +1,8 @@
-// app/page.tsx（以前の構成に戻した完全版）
+// app/page.tsx
 
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";
-import HeroWinterSolution from "./components/HeroWinterSolution";
-import ServiceSummary from "./components/ServiceSummary";
-import FlowAndPlan from "./components/FlowAndPlan";
+
 
 import MainVisual from "./components/MainVisual";
 import LitStorySection from "./components/LitStorySection";
@@ -43,9 +41,7 @@ export default function Home() {
       {/* === 7. その他コンテンツ（ブログ等） === */}
       <OtherContents />
       
-  <HeroWinterSolution />
-      <ServiceSummary />
-      <FlowAndPlan />
+
       {/* === Schema.org === */}
       <script
         type="application/ld+json"

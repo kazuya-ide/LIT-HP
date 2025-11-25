@@ -21,7 +21,7 @@ const navLinks = [
   { label: "事業紹介", href: "/services" },
   { label: "実績紹介", href: "/works" },
   { label: "ニュース", href: "/news" },
-  { label: "採用情報", href: "https://en-gage.net/llc-lit/" },
+  { label: "採用情報", href: "/recruit" },
 ];
 
 const rightButtons = [{ label: "お問い合わせ", href: "/contact" }];
